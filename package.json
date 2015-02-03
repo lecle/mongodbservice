@@ -4,9 +4,9 @@
   "description": "mongodb microservice",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "test": "mocha --require test/support/env --recursive",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --require test/support/env --reporter dot --check-leaks test/",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --require test/support/env --reporter spec --check-leaks test/"
   },
   "repository": {
     "type": "git",
