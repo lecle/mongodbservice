@@ -24,7 +24,8 @@
   "dependencies": {
     "assert": "~1.2.0",
     "istanbul": "^0.3.5",
-    "mocha": "~2.0.1"
+    "mocha": "~2.0.1",
+    "mongo-factory": "0.0.6",
+    "mongodb": "^1.4.30"
   }
 }
-
