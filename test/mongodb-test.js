@@ -3,7 +3,7 @@ var mongodb = require('../lib/mongodb');
 var req = {
     data : {
         collectionName : 'testcol',
-        query : {test : 'data'},
+        query : {where : {test : 'data'}},
         data : {test : 'data'},
         keys : ['test']
     }
