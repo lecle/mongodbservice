@@ -11,12 +11,10 @@ var req = {
 
 var res = function(done) {
 
-    var res = {
+    return {
         send : function() {done();},
         error : function(err) {done(err);}
     };
-
-    return res;
 };
 
 describe('mongodb', function() {
