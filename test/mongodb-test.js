@@ -90,6 +90,14 @@ describe('mongodb', function() {
         });
     });
 
+    describe('#stats()', function() {
+        it('should stats without error', function(done) {
+
+            mongodb.stats(req, res(done));
+        });
+    });
+
+
     describe('#remove()', function() {
         it('should remove without error', function(done) {
 
