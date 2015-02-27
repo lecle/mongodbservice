@@ -4,7 +4,7 @@ var req = {
     data : {
         collectionName : 'testcol',
         query : {where : {test : 'data'}},
-        data : {test : 'data'},
+        data : {test : 'data', num : 1},
         keys : ['test']
     }
 };
@@ -72,6 +72,21 @@ describe('mongodb', function() {
             req.data.data = {test:'data2'};
 
             mongodb.update(req, res(done));
+        });
+    });
+
+    describe('#aggregate()', function() {
+        it('should aggregate without error', function(done) {
+
+            req.data.query = [
+                { $match : { test : 'data2' }},
+                { $group : {
+                    _id : { test : "$test" },
+                    num : { $sum : "$num" }
+                }}
+            ];
+
+            mongodb.aggregate(req, res(done));
         });
     });
 
