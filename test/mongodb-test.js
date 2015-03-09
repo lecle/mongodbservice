@@ -4,7 +4,38 @@ var req = {
     data : {
         collectionName : 'testcol',
         query : {where : {test : 'data'}},
-        data : {test : 'data', num : 1},
+        data : {
+            test : 'data',
+            num : 1,
+            "point1": {
+                "type": "Point",
+                "coordinates": [
+                    -73.97,
+                    40.77
+                ]
+            },
+            "point2": {
+                "type": "Point",
+                "coordinates": [
+                    -72.97,
+                    40.77
+                ]
+            },
+            "point3": {
+                "type": "Point",
+                "coordinates": [
+                    -71.97,
+                    40.77
+                ]
+            },
+            "point4": {
+                "type": "Point",
+                "coordinates": [
+                    -71.97,
+                    40.77
+                ]
+            }
+        },
         keys : ['test']
     }
 };
@@ -56,6 +87,33 @@ describe('mongodb', function() {
         it('should count without error', function(done) {
 
             mongodb.count(req, res(done));
+        });
+    });
+
+    describe('$near', function() {
+
+        it('should findOne($near) without error', function(done) {
+
+            var reqNear = {data : {collectionName : 'testcol', query : {where : {point1 : {$near : { $geometry: { type: "Point",  coordinates: [ -73.9667, 40.78 ] }, $minDistance: 1000, $maxDistance: 5000} } }}}};
+            mongodb.findOne(reqNear, res(done));
+        });
+
+        it('should find($near) without error', function(done) {
+
+            var reqNear = {data : {collectionName : 'testcol', query : {where : {point2 : {$near : { $geometry: { type: "Point",  coordinates: [ -73.9667, 40.78 ] }, $minDistance: 1000, $maxDistance: 5000} } }}}};
+            mongodb.find(reqNear, res(done));
+        });
+
+        it('should find(count, $near) without error', function(done) {
+
+            var reqNear = {data : {collectionName : 'testcol', count : 1, query : {where : {point3 : {$near : { $geometry: { type: "Point",  coordinates: [ -73.9667, 40.78 ] }, $minDistance: 1000, $maxDistance: 5000} } }}}};
+            mongodb.find(reqNear, res(done));
+        });
+
+        it('should count($near) without error', function(done) {
+
+            var reqNear = {data : {collectionName : 'testcol', query : {where : {point4 : {$near : { $geometry: { type: "Point",  coordinates: [ -73.9667, 40.78 ] }, $minDistance: 1000, $maxDistance: 5000} } }}}};
+            mongodb.count(reqNear, res(done));
         });
     });
 
