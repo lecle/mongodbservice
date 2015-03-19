@@ -53,7 +53,7 @@ describe('mongodb', function() {
         it('should initialize without error', function(done) {
 
             // manager service load
-            var dummyContainer = {addListener:function(){}};
+            var dummyContainer = {addListener:function(){}, getConfig:function(){return null;}};
 
             mongodb.init(dummyContainer, function(err) {
 
