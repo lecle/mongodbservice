@@ -36,7 +36,19 @@ var req = {
                 ]
             }
         },
-        keys : ['test']
+        group : {
+            key : ['_className'],
+            cond : {},
+            initial : {"count":0},
+            reduce : "function (obj, prev) { prev.count++; }"
+        },
+        aggregate : [
+            { $match : { test : 'data2' }},
+            { $group : {
+                _id : { test : "$test" },
+                num : { $sum : "$num" }
+            }}
+        ]
     }
 };
 
@@ -135,15 +147,7 @@ describe('mongodb', function() {
 
     describe('#aggregate()', function() {
         it('should aggregate without error', function(done) {
-
-            req.data.query = [
-                { $match : { test : 'data2' }},
-                { $group : {
-                    _id : { test : "$test" },
-                    num : { $sum : "$num" }
-                }}
-            ];
-
+            
             mongodb.aggregate(req, res(done));
         });
     });
