@@ -147,7 +147,7 @@ describe('mongodb', function() {
 
     describe('#aggregate()', function() {
         it('should aggregate without error', function(done) {
-            
+
             mongodb.aggregate(req, res(done));
         });
     });
@@ -159,6 +159,14 @@ describe('mongodb', function() {
         });
     });
 
+    describe('use ISODate', function() {
+        it('should stats without error', function(done) {
+
+            req.data.query.where = { updatedAt: { '$gt': {"$ISODate" : "2013-01-23T02:46:54.429Z" } } };
+
+            mongodb.find(req, res(done));
+        });
+    });
 
     describe('#remove()', function() {
         it('should remove without error', function(done) {
