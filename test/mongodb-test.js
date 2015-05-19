@@ -65,7 +65,7 @@ describe('mongodb', function() {
         it('should initialize without error', function(done) {
 
             // manager service load
-            var dummyContainer = {addListener:function(){}, getConfig:function(){return null;}};
+            var dummyContainer = {addListener:function(){}, getConfig:function(){return null;},log : { info : function(log) { console.log(log)}, error : function(log) { console.log(log)}}};
 
             mongodb.init(dummyContainer, function(err) {
 
