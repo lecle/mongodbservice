@@ -3,8 +3,9 @@ var mongodb = require('../lib/mongodb');
 var req = {
     data : {
         collectionName : 'testcol',
-        query : {where : {test : 'data'}},
+        query : {where : {test : 'data', _className : 'test'}},
         data : {
+            _className : 'test',
             test : 'data',
             num : 1,
             "point1": {
@@ -65,7 +66,27 @@ describe('mongodb', function() {
         it('should initialize without error', function(done) {
 
             // manager service load
-            var dummyContainer = {addListener:function(){}, getConfig:function(){return null;},log : { info : function(log) { console.log(log)}, error : function(log) { console.log(log)}}};
+            var dummyContainer = {
+                addListener:function(){},
+                getConfig:function(){return null;},
+                log : {
+                    info : function(log) { console.log(log)},
+                    error : function(log) { console.log(log)}
+                },
+                getService : function(name) {
+
+                    return {
+                        then : function(callback){ callback({
+                            send : function(command, data, callback) {
+
+                            callback(null, {data : {}});
+                        }});
+
+                            return {fail : function(){}};
+                        }
+                    };
+                }
+            };
 
             mongodb.init(dummyContainer, function(err) {
 
