@@ -180,6 +180,14 @@ describe('mongodb', function() {
         });
     });
 
+    describe('#createIndex()', function() {
+        it('should stats without error', function(done) {
+
+            req.data.query = { updatedAt: 1 };
+            mongodb.createIndex(req, res(done));
+        });
+    });
+
     describe('use ISODate', function() {
         it('should stats without error', function(done) {
 
