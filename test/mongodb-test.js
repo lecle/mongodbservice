@@ -71,6 +71,7 @@ describe('mongodb', function() {
                 getConfig:function(){return null;},
                 log : {
                     info : function(log) { console.log(log)},
+                    debug : function(log) { console.log(log)},
                     error : function(log) { console.log(log)}
                 },
                 getService : function(name) {
